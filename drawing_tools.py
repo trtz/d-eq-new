@@ -1,6 +1,8 @@
-from bifurcus import get_bif, get_range, get_start_point, get_boundaries_for_range, get_cycle_boundaries
+from bifurcus import get_bif, get_range, get_start_point,\
+    get_boundaries_for_range, get_cycle_boundaries
 from utils import write_to_files, get_ladder, get_function_points, get_noise
-from functions import get_ricker_function, get_ricker_composition, get_ricker_derivative
+from functions import get_ricker_function, get_ricker_composition,\
+    get_ricker_derivative
 from calculus import get_cycle2_points, get_root
 
 
@@ -32,7 +34,7 @@ def f_main():  # just функция с лестницей Ламерея
     write_to_files(x, y, xpath, ypath)
 
 
-def extinction_cycle_main():  # только для генерации точек для костыльной картинки, принт границ интервада
+def extinction_cycle_main():
     epsilon = 3
     r = 0.125
     curr = 10
@@ -60,7 +62,7 @@ def extinction_cycle_main():  # только для генерации точе�
     print(ys)
 
 
-def cycle2_main():  # зона 2-цикла: точки шумной биф диаграммы и доверительные интервалы
+def cycle2_main():
     delta = 0.00005
     start = 0.12
     end = 0.1788
@@ -72,8 +74,10 @@ def cycle2_main():  # зона 2-цикла: точки шумной биф ди
     erf_value = 2.33
 
     rs = get_range(start, end, delta)
+    end_if_ext = True
 
-    xc, yc = get_bif(rs, offset, count, get_start_point, epsilon, True, stoch_offset)
+    xc, yc = get_bif(rs, offset, count, get_start_point, epsilon,
+                     end_if_ext, stoch_offset)
 
     xcpath = 'files/cx.txt'
     ycpath = 'files/cy.txt'
@@ -133,7 +137,8 @@ def bif_main():  # главная бифуркационная
 
     rs = get_range(start, end, delta)
 
-    x_stoch, y_stoch = get_bif(rs, offset, count, get_start_point, epsilon, True, 1000)
+    x_stoch, y_stoch = get_bif(rs, offset, count, get_start_point,
+                               epsilon, True, 1000)
 
     xpath = 'files/bifx.txt'
     ypath = 'files/bify.txt'
